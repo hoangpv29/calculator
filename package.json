@@ -1,6 +1,7 @@
 {
   "name": "calculator",
   "version": "0.1.0",
+  "homepage": "https://github.com/hoangpv29/calculator",
   "private": true,
   "dependencies": {
     "react": "^18.0.0",
