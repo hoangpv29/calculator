@@ -144,10 +144,10 @@ const Calculator = () => {
     });
   };
 
-/**
- * Hàm xử lý khi người dùng click vào nút xóa ký tự cuối cùng (<=).
- * Hàm này xóa ký tự cuối cùng khỏi số hiện tại.
- */
+  /**
+   * Hàm xử lý khi người dùng click vào nút xóa ký tự cuối cùng (<=).
+   * Hàm này xóa ký tự cuối cùng khỏi số hiện tại.
+   */
   const deleteLastNumberHandler = () => {
     if (calc.num.length > 1) {
       const truncatedNum = calc.num.slice(0, -1);
@@ -165,7 +165,13 @@ const Calculator = () => {
 
   return (
     <Wrapper>
-      <Screen value={calc.num ? calc.num : calc.res} />
+      {/* <Screen value={`${calc.num ? : } ${calc.sign ? : } ${calc.res ? : }`} /> */}
+      <Screen
+        value={`${calc.res ? calc.res : ""} ${calc.sign ? calc.sign : ""} ${
+          calc.num ? calc.num : ""
+        }`}
+      />
+
       <ButtonBox>
         {btnValues.flat().map((btn, i) => {
           return (
