@@ -9,8 +9,9 @@ export const useCalculatorLogic = () => {
   });
 
   const numClickHandler = (e) => {
-    e.preventDefault();
-    const value = e.target.innerHTML;
+    // e.preventDefault();
+    const value = e;
+    // .target.innerHTML;
 
     if (removeSpaces(calc.num).length < 16) {
       setCalc({
@@ -27,8 +28,9 @@ export const useCalculatorLogic = () => {
   };
 
   const commaClickHandler = (e) => {
-    e.preventDefault();
-    const value = e.target.innerHTML;
+    // e.preventDefault();
+    const value = e;
+    // .target.innerHTML;
 
     setCalc({
       ...calc,
@@ -37,13 +39,12 @@ export const useCalculatorLogic = () => {
   };
 
   const signClickHandler = (e) => {
-    e.preventDefault();
-    const value = e.target.innerHTML;
+    const value = e;
 
     setCalc({
       ...calc,
       sign: value,
-      res: !calc.res && calc.num ? calc.num : calc.res,
+      res: calc.sign === "" ? calc.num : calc.res, // Only update result if there's no previous sign
       num: 0,
     });
   };
@@ -106,7 +107,6 @@ export const useCalculatorLogic = () => {
       res: 0,
     });
   };
-
   const deleteLastNumberHandler = () => {
     if (calc.num.length > 1) {
       const truncatedNum = calc.num.slice(0, -1);
@@ -122,6 +122,29 @@ export const useCalculatorLogic = () => {
     }
   };
 
+  const handleButtonClick = (btn) => {
+    switch (btn) {
+      case "C":
+        resetClickHandler();
+        break;
+      case "+-":
+      case "%":
+      case "÷":
+      case "X":
+      case "-":
+      case "+":
+      case ".":
+      case "<=":
+        deleteLastNumberHandler(btn);
+        break;
+      case "=": // Handle equals separately to avoid updating result on other operations
+        equalsClickHandler();
+        break;
+      default:
+        numClickHandler(btn);
+        break;
+    }
+  };
   return {
     calc,
     numClickHandler,
@@ -132,5 +155,6 @@ export const useCalculatorLogic = () => {
     percentClickHandler,
     resetClickHandler,
     deleteLastNumberHandler,
+    handleButtonClick,
   };
 };
