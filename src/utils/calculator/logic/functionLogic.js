@@ -127,13 +127,12 @@ export const useCalculatorLogic = () => {
       case "C":
         resetClickHandler();
         break;
-      case "+-":
-      case "%":
       case "÷":
       case "X":
       case "-":
       case "+":
-      case ".":
+        signClickHandler(btn);
+        break;
       case "<=":
         deleteLastNumberHandler(btn);
         break;
